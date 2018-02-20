@@ -18,12 +18,12 @@ require 'random_data'
     end
     
 #Create unique post
-Post.find_or_create_by!(title: 'My name') do |post|
+new_post = Post.find_or_create_by!(title: 'My name') do |post|
     post.body = "My name is Andrew Wiggins"
 end
 
 #Create unique comment
-Comment.find_or_create_by(post: posts.first, body: "This is a unique comment")
+Comment.find_or_create_by(post: new_post, body: "This is a unique comment")
     
 puts "Seed finished"
 puts "#{Post.count} posts created!"
