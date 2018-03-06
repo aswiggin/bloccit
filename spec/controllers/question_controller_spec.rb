@@ -1,4 +1,5 @@
 require 'rails_helper'
+include RandomData
 
 RSpec.describe QuestionController, type: :controller do
   let(:my_question) { Question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
@@ -87,7 +88,7 @@ RSpec.describe QuestionController, type: :controller do
     it "updates question with expected attributes" do
       new_title = RandomData.random_sentence
       new_body = RandomData.random_paragraph
-      put :update, params: { id: my_question.id, question: {title: new_title, body: new_body} }
+      put :update, params: { id: my_question.id, question: {title: new_title, body: new_body, resolved: false} }
       updated_question = assigns(:question)
       expect(updated_question.id).to eq my_question.id
       expect(updated_question.title).to eq new_title
@@ -97,7 +98,7 @@ RSpec.describe QuestionController, type: :controller do
     it "redirects to the updated question" do
       new_title = RandomData.random_sentence
       new_body = RandomData.random_paragraph
-      put :update, params: { id: my_question.id, question: {title: new_title, body: new_body} }
+      put :update, params: { id: my_question.id, question: {title: new_title, body: new_body, resolved: true} }
       expect(response).to redirect_to my_question
     end
   end
