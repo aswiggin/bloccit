@@ -1,0 +1,11 @@
+<h1> Question Index </h1>
+
+<% @questions.each do |ques| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to ques.title, ques %>
+      </h4>
+    </div>
+  </div>
+<% end %>
