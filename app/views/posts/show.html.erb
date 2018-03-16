@@ -9,11 +9,13 @@
    <div class="col-md-8">
      <p><%= @post.body %></p>
    </div>
-   <% if user_is_authorized_for_post?(@post) %>
+   <% if user_is_authorized_to_edit_post?(@post) %>
    <div class="col-md-4">
      <!-- format a link as an edit button which directs a user to /posts/@post.id/edit -->
      <!-- edit_post_path is a helper method generated in routes.rb in resources :posts -->
      <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
+     <% end %>
+     <% if user_is_authorized_for_post? %>
      <!-- use link_to to create a delete button we override the default method with :delete. use data hash to have pop up confirmation -->
      <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want  to delete this post?'} %>
    </div>
