@@ -13,6 +13,8 @@
    # associate post with topic chained method call which creates a post for a given topic
    # associate user with post when we create a test post
    let(:post) { topic.posts.create!(title: title, body: body, user: user) }
+   
+   it { is_expected.to have_many(:comments) }
 
    it { is_expected.to belong_to(:topic) }
    it { is_expected.to belong_to(:user) }

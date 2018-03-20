@@ -8,7 +8,16 @@
  <div class="row">
    <div class="col-md-8">
      <p><%= @post.body %></p>
+     <!-- will call the _comment partial -->
+     <div>
+       <h3>Comments</h3>
+       <%= render @post.comments %>
+     </div>
+     <% if current_user %>
+       <%= render 'comments/form', comment: Comment.new, post: @post %>
+       <% end %>
    </div>
+ </div>
    <% if user_is_authorized_for_post?(@post) %>
    <div class="col-md-4">
      <!-- format a link as an edit button which directs a user to /posts/@post.id/edit -->
