@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :posts, only: [] do
     # only need routes for these two actions since comments will be viewed on a posts show view
     resources :comments, only: [:create, :destroy]
+    post '/up-vote' => 'votes#up_vote', as: :up_vote
+    post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
   
   resources :users, only: [:new, :create]
