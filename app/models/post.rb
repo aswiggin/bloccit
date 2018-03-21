@@ -3,6 +3,7 @@ class Post < ApplicationRecord
     belongs_to :user
     has_many :comments, dependent: :destroy
     has_many :votes, dependent: :destroy
+    has_many :favorites, dependent: :destroy
     # order post by their created_at date in decending order
     default_scope { order('rank DESC') }
     

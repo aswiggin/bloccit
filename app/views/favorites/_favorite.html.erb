@@ -1,0 +1,11 @@
+ <% if favorite = current_user.favorite_for(post) %>
+ // if there is a favorite for the current user and post we display an unfavorite button
+   <%= link_to [post, favorite], class: 'btn btn-danger', method: :delete do %>
+     <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Unfavorite
+   <% end %>
+ <% else %>
+ // if there isn't a favorite for the user then the favorite button is shown
+   <%= link_to [post, Favorite.new], class: 'btn btn-primary', method: :post do %>
+     <i class="glyphicon glyphicon-star"> </i>&nbsp; Favorite
+   <% end %>
+ <% end %>
