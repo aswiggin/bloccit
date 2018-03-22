@@ -6,6 +6,8 @@ class Post < ApplicationRecord
     has_many :favorites, dependent: :destroy
     # order post by their created_at date in decending order
     default_scope { order('rank DESC') }
+    # use -> to ensure a user is present or signed in. if present we return all posts, if not then we return the public ones
+    scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
     
    validates :title, length: { minimum: 5 }, presence: true
    validates :body, length: { minimum: 20 }, presence: true

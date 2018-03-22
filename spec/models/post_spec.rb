@@ -6,13 +6,13 @@
    let(:title) { RandomData.random_sentence }
    let(:body) { RandomData.random_paragraph }
    # creating a parent topic for post
-   let(:topic) { Topic.create!(name: name, description: description) }
+   let(:topic) { create(:topic) }
    
    # create a user association with a test post
-   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
+   let(:user) { create(:user) }
    # associate post with topic chained method call which creates a post for a given topic
    # associate user with post when we create a test post
-   let(:post) { topic.posts.create!(title: title, body: body, user: user) }
+   let(:post) { create(:post) }
    
    it { is_expected.to have_many(:comments) }
    it { is_expected.to have_many(:votes) }
@@ -32,7 +32,7 @@
    
    describe "attributes" do
      it "has title, body, and user attributes" do
-       expect(post).to have_attributes(title: title, body: body, user: user)
+       expect(post).to have_attributes(title: post.title, body: post.body, user: post.user)
      end
    end
    
